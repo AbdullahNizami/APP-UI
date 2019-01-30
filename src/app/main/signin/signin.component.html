@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="col-md-6">
+  <div id="logbox">
+    <form id="signup" (submit)="onSubmit()" #userform="ngForm">
+      <h1>create an account</h1>
+      <input name="user[name]" type="text" placeholder="What's your username?" pattern="^[\w]{3,16}$" autofocus="autofocus" required="required" class="input pass"/>
+      <input name="user[password]" type="password" class="form-control" [(ngModel)]="userform.password" #password="ngModel" [ngClass]= "{'is-invalid':userform.submitted && password.invalid}" required minlength="6"  placeholder="Choose a password"  class="input pass"/>
+      <div *ngIf="userform.submitted && password.invalid" class="invalid-feedback">
+        <div class="alert" *ngIf="password.errors.required">Password is required</div>
+        <div class="alert" *ngIf="password.errors.minlength">Password must be at least 6 Characters</div>
+      </div>
+      <input name="user[password2]" type="password" class="form-control" [(ngModel)]="userform.cnfpassword" #cnfpassword="ngModel" [ngClass]= "{'is-invalid':userform.submitted && cnfpassword.invalid}" required confirm ="password" placeholder="Confirm password" class="input pass"/>
+      <div *ngIf="userform.submitted && cnfpassword.invalid" class="invalid-feedback">
+        <div class="alert" *ngIf="cnfpassword.errors.required">confirm Password is required</div>
+        <div class="alert" *ngIf="cnfpassword.errors.confirm">confirm Password not macth</div>
+      </div>
+      <input name="email" type="text" class="form-control" [(ngModel)]="userform.email" #email="ngModel" [ngClass]="{'is-invalid': userform.submitted && email.invalid}" required email placeholder="Email address" class="input pass"/>
+      <div *ngIf="userform.submitted && email.invalid" class="invalid-feedback">
+        <div class="alert" *ngIf="email.errors.required">Email is required</div>
+        <div class="alert" *ngIf="email.errors.email">Email must be a valid email Address</div>
+        <div class="exist"> {{error}} </div>
+      </div>
+      <!-- <input type="submit" value="Sign me up!" class="inputButton"/> -->
+      <button type="submit" class="inputButton">Sign me Up</button>
+      <div class="text-center"> 
+          already have an account? <a href="#" id="login_id">login</a>
+      </div>
+    </form>
+  </div>
+ </div>
